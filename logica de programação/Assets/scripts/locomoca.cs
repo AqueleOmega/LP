@@ -9,6 +9,9 @@ public class locomoca : MonoBehaviour
 
     [SerializeField] private float forcaPulo = 10f;
 
+    private bool estouNoChao = false;
+
+
     // im at the club
     void Start()
     {
@@ -34,8 +37,16 @@ public class locomoca : MonoBehaviour
     }
 
     private void Pular(){
-        if(Input.GetKeyDown(KeyCode.Space)){
+        if(Input.GetKeyDown((KeyCode.Space)) && estouNoChao == true){
+            estouNoChao = false;
+            Debug.Log("Pulou");
             rb.AddForce(Vector2.up * forcaPulo, ForceMode2D.Impulse);
+        }
+    }
+    private void OnCollisionEnter2D (Collision2D obj){
+        if (obj.gameObject.tag == "Chao") {
+            Debug.Log("Está no chão");
+            estouNoChao = true;
         }
     }
 }
