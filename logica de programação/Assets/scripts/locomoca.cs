@@ -8,6 +8,7 @@ public class locomoca : MonoBehaviour
     [SerializeField] private float velocidade = 10f;
 
     [SerializeField] private float forcaPulo = 10f;
+
     
     [SerializeField] private Animator animator; 
 
@@ -33,6 +34,7 @@ public class locomoca : MonoBehaviour
         if(Input.GetKey(KeyCode.A)){
             rb.linearVelocity = new Vector2 (velocidade * -1, rb.linearVelocity.y);
 
+
             transform.localRotation = Quaternion.Euler(0, -180, 0);
             //Eu acesso o componente transform que essa script está atribuida e mexo na rotação local dela
             //Ela pede uma 'quartenion identity', (um valor quartenion, como o API fala: Quaternions are used to represent rotations.)
@@ -40,12 +42,16 @@ public class locomoca : MonoBehaviour
             //Euler	Converts an input Euler angle rotation specified as three floats to a Quaternion.
             //Resumidamente, ela faz que o Quartenion sejam apenas angulos normais,e eu mexo na rotação Y para inverter-la.
         }
-        else if(Input.GetKey(KeyCode.D)){
+        else
+            {
+                if(Input.GetKey(KeyCode.D)){
             rb.linearVelocity = new Vector2 (velocidade * 1, rb.linearVelocity.y);
             
             transform.localRotation = Quaternion.Euler(0, 0, 0);
             //Mesma coisa do de cima
-        }
+                }
+                transform.localRotation = Quaternion.Euler(0, 0, 0);
+            }   
         if(direção != 0){
             animator.SetBool("EstaCorrendo", true);
         }
